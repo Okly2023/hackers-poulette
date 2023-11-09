@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="file.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function() {
+    $('#contactForm').submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: 'send.php',
+            type: 'post',
+            data: $('#contactForm').serialize(),
+            success: function(response) {
+                $('#response').html(response);
+            },
+            error: function() {
+                alert('Message could not be sent. Please try again.');
+            }
+        });
+    });
+});
+    </script>
+    </head>
+<body>
+    <h1>Contact Support</h1>
+<form action="send.php" method="post" >
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" value=""><br>
+    <label for="lname">Last Name:</label><br>
+    <input type="text" id="lname" name="lname" value=""><br>
+    <label for="gender">Gender:</label><br>
+    <select id="gender" name="gender">
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="other">Other</option>
+    </select><br>
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" value=""><br>
+    <label for="country">Country:</label><br>
+    <input type="text" id="country" name="country" value=""><br>
+    <label for="subject">Subject:</label><br>
+    <select id="subject" name="subject">
+      <option value="Issue">Issue</option>
+      <option value="Query">Query</option>
+      <option value="Other">Other</option>
+    </select><br>
+    <label for="message">Message:</label><br>
+    <textarea id="message" name="message" value=""></textarea><br>
+    <input type="submit" name="Submit" value="Submit">
+  </form>
+  <div id="response"></div>
+ </body> 
+</html>
